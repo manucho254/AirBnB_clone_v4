@@ -99,3 +99,36 @@
 .user {
   margin-bottom: 1.5%;
 }
+
+
+article .reviews { 
+   margin-top: 40px;
+   display: flex;
+   flex-direction: column;
+}
+
+article .reviews h2 {
+  font-size: 16px;
+  border-bottom: 1px solid #DDDDDD;
+  width: 100%;
+  text-align: start;
+  padding-bottom: 10px;
+}
+
+article .reviews ul{
+   padding-top: 15px;
+   list-style-type: none;
+}
+
+article .reviews ul li{
+  padding: 0 0 10px 0;
+  width: 100%;
+}
+
+article .reviews ul li h3{
+  font-size: 14px;
+}
+
+article .reviews ul li p{
+  font-size: 12px;
+}
