@@ -15,6 +15,7 @@ $(document).ready(function () {
     }
   });
 
+  // get api status
   $.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
     const res = JSON.parse(JSON.stringify(data));
     if (res.status === 'OK') {
@@ -24,22 +25,32 @@ $(document).ready(function () {
     }
   });
 
-  $.ajax({
-    type: 'POST',
-    url: 'http://0.0.0.0:5001/api/v1/places_search/',
-    contentType: 'application/json',
-    data: '{}',
-    dataType: 'json',
-    success: function (data) {
-      data.forEach(function (place) {
-        $('section.places').append('<article><div class="title_box"><h2>' +
+  // Search for places
+  function searchPlaces (amenityIds) {
+    $.ajax({
+      type: 'POST',
+      url: 'http://0.0.0.0:5001/api/v1/places_search/',
+      contentType: 'application/json',
+      data: amenityIds,
+      dataType: 'json',
+      success: function (data) {
+        $('section.places').empty();
+        data.forEach(function (place) {
+          $('section.places').append('<article><div class="title_box"><h2>' +
        place.name + '</h2><div class="price_by_night">$' + place.price_by_night +
        '</div></div><div class="information"><div class="max_guest">' +
        place.max_guest + '</div><div class="number_rooms">' +
        place.number_rooms + '</div><div class="number_bathrooms">' +
        place.number_bathrooms + '</div></div><div class="description">' +
        place.description + '</div></article>');
-      });
-    }
+        });
+      }
+    });
+  }
+  searchPlaces('{}');
+
+  $('section.filters > button').click(function () {
+    const amenityIds = Object.keys(amenities).map(id => `"${id}"`);
+    searchPlaces(`{"amenities" : [${amenityIds}]}`);
   });
 });

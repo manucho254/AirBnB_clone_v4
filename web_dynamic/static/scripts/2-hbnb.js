@@ -13,14 +13,13 @@ $(document).ready(function () {
       $('div.amenities > h4').html(' ');
     }
   });
-});
 
-$.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
-  const res = JSON.parse(JSON.stringify(data));
-  if (res.status === 'OK') {
-    console.log('ok');
-    $('#api_status').addClass('available');
-  } else {
-    $('#api_status').removeClass('available');
-  }
+  $.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
+    const res = JSON.parse(JSON.stringify(data));
+    if (res.status === 'OK') {
+      $('#api_status').addClass('available');
+    } else {
+      $('#api_status').removeClass('available');
+    }
+  });
 });
